@@ -240,6 +240,7 @@ struct ComputerscareRolyPouterWidget : ModuleWidget {
 	}
 	void addLabeledKnob(std::string label, int x, int y, ComputerscareRolyPouter *module, int index, float labelDx, float labelDy) {
 
+		//the text inside the knobs
 		pouterSmallDisplay = new PouterSmallDisplay(index);
 		pouterSmallDisplay->box.size = Vec(20, 20);
 		pouterSmallDisplay->box.pos = Vec(x - 2.5 , y + 1.f);
@@ -248,8 +249,8 @@ struct ComputerscareRolyPouterWidget : ModuleWidget {
 		pouterSmallDisplay->breakRowWidth = 20;
 		pouterSmallDisplay->module = module;
 
-
-		outputChannelLabel = new SmallLetterDisplay();
+		//the text outside the knobs
+		outputChannelLabel = new SmallLetterDisplayTEST();
 		outputChannelLabel->box.size = Vec(5, 5);
 		outputChannelLabel->box.pos = Vec(x + labelDx, y - 12 + labelDy);
 		outputChannelLabel->fontSize = 14;
@@ -338,7 +339,7 @@ struct ComputerscareRolyPouterWidget : ModuleWidget {
 	DisableableSnapKnob* knob;
 	PolyOutputChannelsWidget* channelWidget;
 	PouterSmallDisplay* pouterSmallDisplay;
-	SmallLetterDisplay* outputChannelLabel;
+	SmallLetterDisplayTEST* outputChannelLabel;
 
 	void addMenuItems(ComputerscareRolyPouter *pouter, Menu *menu);
 };

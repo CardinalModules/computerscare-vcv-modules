@@ -247,6 +247,7 @@ struct ComputerscareLaundrySoup : Module {
     shouldChange[index] = true;
   }
   void checkChannelCount(int index) {
+    channelCountEnum[index] = -1;
     if (channelCountEnum[index] == -1) {
       if (currentFormula[index].find("#") != std::string::npos) {
         channelCount[index] = 16;

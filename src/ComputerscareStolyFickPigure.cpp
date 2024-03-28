@@ -305,7 +305,7 @@ struct StolyFickPigureDisplay : TransparentWidget {
 			}
 		}
 	}
-	void drawLayer(const BGPanel::DrawArgs& args, int layer) override {
+	void drawLayer(const ComputerscareBGPanel::DrawArgs& args, int layer) override {
 		if (layer == 1 && module) {
 			if (module->figureEmitsLight) {
 				drawStickFigure(args, module->bufferX[0][0], module->bufferX[1][0], module->bufferX[2][0], module->bufferX[3][0], module->bufferX[4][0], module->bufferX[5][0], module->bufferX[6][0], module->bufferX[7][0], module->bufferX[8][0], module->bufferX[9][0], module->bufferX[10][0], module->bufferX[11][0], module->bufferX[12][0], module->bufferX[13][0], module->bufferX[14][0], module->bufferX[15][0]);
@@ -338,7 +338,7 @@ struct StolyFickPigureWidget : ModuleWidget {
 		}
 
 		addInput(createInput<PointingUpPentagonPort>(Vec(1, 353), module, StolyFickPigure::X_INPUT));
-		addParam(createParam<SmallKnob>(Vec(31, 357), module, StolyFickPigure::TRIM));
+		addParam(createParam<ComputerscareSmallKnob>(Vec(31, 357), module, StolyFickPigure::TRIM));
 		addParam(createParam<SmoothKnob>(Vec(51, 353), module, StolyFickPigure::OFFSET));
 
 		addParam(createParam<ScrambleKnob>(Vec(81, 357), module, StolyFickPigure::SCRAMBLE));

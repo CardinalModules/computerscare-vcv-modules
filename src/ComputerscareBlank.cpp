@@ -16,6 +16,7 @@
 #include <algorithm>
 
 struct ComputerscareBlank : ComputerscareMenuParamModule {
+	ComputerscareBlank *module;
 	bool loading = true;
 	bool loadedJSON = false;
 	bool jsonFlag = false;
@@ -343,11 +344,21 @@ struct ComputerscareBlank : ComputerscareMenuParamModule {
 	}
 	void loadImageDialog(int index = 0) {
 		std::string dir = this->paths[index].empty() ?  asset::user("../") : asset::user(this->paths[index]);
+#ifdef USING_CARDINAL_NOT_RACK
+		ComputerscareBlank *module = this->module;
+		async_dialog_filebrowser(false, NULL, dir.c_str(), "Load image", [this](char* pathC) {
+			pathSelected(pathC);
+		});
+#else
 		char* pathC = osdialog_file(OSDIALOG_OPEN, dir.c_str(), NULL, NULL);
+		pathSelected(pathC);
+#endif
+	}
+
+	void pathSelected(char* pathC) {
 		if (!pathC) {
 			return;
 		}
-
 		std::string path = pathC;
 		std::free(pathC);
 
@@ -892,7 +903,7 @@ struct tPNGDisplay : TBase {
 
 	void setOffsets() {
 	}
-	void drawLayer(const BGPanel::DrawArgs& args, int layer) override {
+	void drawLayer(const ComputerscareBGPanel::DrawArgs& args, int layer) override {
 		if (layer == 1 && lightWidgetMode) {
 			drawImage(args);
 		}
@@ -904,7 +915,7 @@ struct tPNGDisplay : TBase {
 		}
 	}
 
-	void drawImage(const BGPanel::DrawArgs& args) {
+	void drawImage(const ComputerscareBGPanel::DrawArgs& args) {
 		if (blankModule && blankModule->loadedJSON) {
 			std::string modulePath = blankModule->getPath();
 			if (path != modulePath) {
@@ -1087,7 +1098,7 @@ struct ComputerscareBlankWidget : ModuleWidget {
 			box.size = Vec(8 * 15, 380);
 		}
 		{
-			BGPanel *bgPanel = new BGPanel(nvgRGB(0xE0, 0xE0, 0xD9));
+			ComputerscareBGPanel *bgPanel = new ComputerscareBGPanel(nvgRGBA(0x00, 0x00, 0x00, 0x00));
 			bgPanel->box.size = box.size;
 			this->bgPanel = bgPanel;
 			addChild(bgPanel);
@@ -1122,6 +1133,14 @@ struct ComputerscareBlankWidget : ModuleWidget {
 		frameDisplay->module = blankModule;
 		addChild(frameDisplay);
 
+	}
+
+	void draw(const rack::Widget::DrawArgs &args) {
+		nvgBeginPath(args.vg);
+		nvgRect(args.vg, 0.0, 0.0, box.size.x, box.size.y);
+		nvgFillColor(args.vg, settings::preferDarkPanels ? nvgRGB(0x1f, 0x1f, 0x26) : nvgRGB(0xe0, 0xe0, 0xd9));
+		nvgFill(args.vg);
+		ModuleWidget::draw(args);
 	}
 
 	void appendContextMenu(Menu* menu) override {
@@ -1308,7 +1327,7 @@ struct ComputerscareBlankWidget : ModuleWidget {
 	ComputerscareBlank *blankModule;
 	PNGDisplay *pngDisplay;
 	ComputerscareSVGPanel *panel;
-	BGPanel *bgPanel;
+	ComputerscareBGPanel *bgPanel;
 	TransparentWidget *display;
 	ComputerscareResizeHandle *leftHandle;
 	ComputerscareResizeHandle *rightHandle;

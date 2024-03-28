@@ -350,7 +350,7 @@ struct StringDisplayWidget3 : Widget {
 	void draw(const DrawArgs &ctx) override
 	{
 		// Background
-		NVGcolor backgroundColor = nvgRGB(0x10, 0x00, 0x10);
+		NVGcolor backgroundColor = settings::preferDarkPanels ? nvgRGB(0x24, 0x44, 0x31) : nvgRGB(0x10, 0x00, 0x10);
 		NVGcolor StrokeColor = nvgRGB(0xC0, 0xC7, 0xDE);
 		nvgBeginPath(ctx.vg);
 		nvgRoundedRect(ctx.vg, -1.0, -1.0, box.size.x + 2, box.size.y + 2, 4.0);
@@ -361,7 +361,7 @@ struct StringDisplayWidget3 : Widget {
 		nvgFillColor(ctx.vg, backgroundColor);
 		nvgFill(ctx.vg);
 	}
-	void drawLayer(const BGPanel::DrawArgs& args, int layer) override {
+	void drawLayer(const ComputerscareBGPanel::DrawArgs& args, int layer) override {
 		if (layer == 1) {
 
 			std::shared_ptr<Font> font = APP->window->loadFont(asset::plugin(pluginInstance, fontPath));
@@ -380,7 +380,7 @@ struct StringDisplayWidget3 : Widget {
 		Widget::drawLayer(args, layer);
 	}
 };
-struct ConnectedSmallLetter : SmallLetterDisplay {
+struct ConnectedSmallLetter : SmallLetterDisplayTEST {
 	ComputerscareDebug *module;
 	int index;
 	ConnectedSmallLetter(int dex) {
@@ -410,7 +410,7 @@ struct ConnectedSmallLetter : SmallLetterDisplay {
 				}
 			}
 		}
-		SmallLetterDisplay::draw(ctx);
+		SmallLetterDisplayTEST::draw(ctx);
 	}
 };
 struct ComputerscareDebugWidget : ModuleWidget {

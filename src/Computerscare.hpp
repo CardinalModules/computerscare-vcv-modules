@@ -42,7 +42,7 @@ static const NVGcolor COLOR_COMPUTERSCARE_YELLOW = nvgRGB(0xE4, 0xC4, 0x21);
 static const NVGcolor COLOR_COMPUTERSCARE_BLUE = nvgRGB(0x24, 0x44, 0xC1);
 static const NVGcolor COLOR_COMPUTERSCARE_PINK = nvgRGB(0xAA, 0x18, 0x31);
 static const NVGcolor COLOR_COMPUTERSCARE_TRANSPARENT = nvgRGBA(0x00, 0x00, 0x00, 0x00);
-static const NVGcolor BLACK = nvgRGB(0x00, 0x00, 0x00);
+static const NVGcolor COLOR_COMPUTERSCARE_BLACK = nvgRGB(0x00, 0x00, 0x00);
 
 
 namespace rack {
@@ -73,10 +73,10 @@ struct ComputerscareSvgPort : PortWidget {
 
 } // namespace app
 } // namespace rack
-struct BGPanel : Widget {
+struct ComputerscareBGPanel : Widget {
 	NVGcolor color;
 
-	BGPanel(NVGcolor _color) {
+	ComputerscareBGPanel(NVGcolor _color) {
 		color = _color;
 	}
 
@@ -375,8 +375,8 @@ struct SmoothKnobNoRandom : RoundKnob {
 		setSvg(APP->window->loadSvg(asset::plugin(pluginInstance, "res/computerscare-medium-knob-effed.svg")));
 	}
 };
-struct SmallKnob : RoundKnob {
-	SmallKnob() {
+struct ComputerscareSmallKnob : RoundKnob {
+	ComputerscareSmallKnob() {
 		setSvg(APP->window->loadSvg(asset::plugin(pluginInstance, "res/computerscare-small-knob-effed.svg")));
 	}
 };
@@ -424,7 +424,7 @@ struct BigSmoothKnob : RoundKnob {
 		setSvg(APP->window->loadSvg(asset::plugin(pluginInstance, "res/computerscare-big-knob-effed.svg")));
 	}
 };
-struct ComputerscareDotKnob : SmallKnob {
+struct ComputerscareDotKnob : ComputerscareSmallKnob {
 	ComputerscareDotKnob() {
 
 	}
@@ -456,7 +456,7 @@ struct ComputerscareTextField : ui::TextField {
 			nvgFillColor(args.vg, COLOR_COMPUTERSCARE_PINK);
 		}
 		else {
-			nvgFillColor(args.vg, nvgRGB(0x00, 0x00, 0x00));
+			nvgFillColor(args.vg, settings::preferDarkPanels ? nvgRGB(0x24, 0x44, 0x31) : nvgRGB(0x00, 0x00, 0x00));
 		}
 		nvgFill(args.vg);
 
@@ -464,13 +464,13 @@ struct ComputerscareTextField : ui::TextField {
 			drawText(args);
 		}
 	}
-	void drawLayer(const BGPanel::DrawArgs& args, int layer) override {
+	void drawLayer(const ComputerscareBGPanel::DrawArgs& args, int layer) override {
 		if (layer == 1 && !dimWithRoom) {
 			drawText(args);
 		}
 		Widget::drawLayer(args, layer);
 	}
-	void drawText(const BGPanel::DrawArgs& args) {
+	void drawText(const ComputerscareBGPanel::DrawArgs& args) {
 		std::shared_ptr<Font> font = APP->window->loadFont(asset::system(fontPath));
 		if (font) {
 			// Text
@@ -566,6 +566,52 @@ struct SmallLetterDisplay : Widget {
 			Vec textPos = Vec(6.0f, 12.0f).plus(textOffset);
 			NVGcolor color = (!blink || doubleblink) ? textColor : COLOR_COMPUTERSCARE_YELLOW;
 			nvgFillColor(ctx.vg, color);
+			nvgTextBox(ctx.vg, textPos.x, textPos.y, breakRowWidth, value.c_str(), NULL);
+		}
+
+	}
+};
+
+struct SmallLetterDisplayTEST : Widget {
+
+	std::string value;
+	std::string fontPath;
+	int fontSize = 19;
+	std::string defaultFontPath = "res/Oswald-Regular.ttf";
+	NVGcolor baseColor = COLOR_COMPUTERSCARE_TRANSPARENT;
+	NVGcolor textColor = nvgRGBA(0x10, 0x10, 0x00, 0x00);
+	Vec textOffset = Vec(0, 0);
+
+	float letterSpacing = 2.5;
+	int textAlign = 1;
+	bool active = false;
+	bool blink = false;
+	bool doubleblink = false;
+	float breakRowWidth = 80.f;
+
+	SmallLetterDisplayTEST() {
+		value = "";
+		fontPath = asset::plugin(pluginInstance, defaultFontPath);
+	};
+	SmallLetterDisplayTEST(std::string providedFontPath) {
+		value = "";
+		fontPath = asset::plugin(pluginInstance, providedFontPath);
+	};
+
+	void draw(const DrawArgs &ctx) override
+	{
+		// labels
+		std::shared_ptr<Font> font = APP->window->loadFont(fontPath);
+		if (font) {
+			nvgFontFaceId(ctx.vg, font->handle);
+			nvgFontSize(ctx.vg, fontSize);
+
+			nvgTextLetterSpacing(ctx.vg, letterSpacing);
+			nvgTextLineHeight(ctx.vg, 0.7);
+			nvgTextAlign(ctx.vg, textAlign);
+
+			Vec textPos = Vec(6.0f, 12.0f).plus(textOffset);
+			nvgFillColor(ctx.vg, settings::preferDarkPanels ? nvgRGB(0xef, 0xef, 0xff) : nvgRGB(0x10, 0x10, 0x00));
 			nvgTextBox(ctx.vg, textPos.x, textPos.y, breakRowWidth, value.c_str(), NULL);
 		}
 

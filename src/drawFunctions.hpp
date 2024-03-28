@@ -36,7 +36,7 @@ struct DrawHelper {
     }
     nvgRestore(vg);
   }
-  void drawDots(std::vector<Vec> points, NVGcolor fillColor = BLACK, float thickness = 1.f) {
+  void drawDots(std::vector<Vec> points, NVGcolor fillColor = COLOR_COMPUTERSCARE_BLACK, float thickness = 1.f) {
     unsigned int n = points.size();
     //nvgSave(vg);
     // nvgBeginPath(vg);
@@ -134,7 +134,7 @@ struct DrawHelper {
     }
     nvgRestore(vg);
   }
-  void drawField(std::vector<Vec> points, NVGcolor strokeColor = BLACK, float length = 4, float thickness = 1.f) {
+  void drawField(std::vector<Vec> points, NVGcolor strokeColor = COLOR_COMPUTERSCARE_BLACK, float length = 4, float thickness = 1.f) {
     unsigned int n = points.size();
     nvgSave(vg);
     // nvgBeginPath(vg);

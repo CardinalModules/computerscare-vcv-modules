@@ -113,10 +113,6 @@ struct PoolsSmallDisplay : SmallLetterDisplay
 			else if (type == 1) {
 				value = std::to_string(module->rotation);
 			}
-			else if (type == 2) {
-				value = std::to_string(module->numInputChannels);
-			}
-
 		}
 		else {
 			value = std::to_string((random::u32() % 16) + 1);
@@ -124,6 +120,36 @@ struct PoolsSmallDisplay : SmallLetterDisplay
 		SmallLetterDisplay::draw(args);
 	}
 
+};
+
+// this struct was added to control the color of the input label independently from the other label
+// yes it is a copy paste of the above structure, and a very janky solution like the rest of the
+// modules where Computerscare.cpp draws its labels but so far I haven't noticed anything that
+// isn't working the way it should...
+struct PoolsSmallDisplayInput : SmallLetterDisplayTEST
+{
+	ComputerscareTolyPools *module;
+	int ch;
+	int type = 0;
+	PoolsSmallDisplayInput(int someType)
+	{
+		type = someType;
+		SmallLetterDisplayTEST();
+	};
+	void draw(const DrawArgs &args)
+	{
+		if (module)
+		{
+			if (type == 2) {
+				value = std::to_string(module->numInputChannels);
+			}
+
+		}
+		else {
+			value = std::to_string((random::u32() % 16) + 1);
+		}
+		SmallLetterDisplayTEST::draw(args);
+	}
 };
 
 struct ComputerscareTolyPoolsWidget : ModuleWidget {
@@ -153,14 +179,14 @@ struct ComputerscareTolyPoolsWidget : ModuleWidget {
 		//addParam
 
 		addInput(createInput<InPort>(Vec(1	, 50), module, ComputerscareTolyPools::POLY_INPUT));
-		poolsSmallDisplay = new PoolsSmallDisplay(2);
-		poolsSmallDisplay->box.size = Vec(14, 20);
-		poolsSmallDisplay->box.pos = Vec(-3 , 80);
-		poolsSmallDisplay->fontSize = 22;
-		poolsSmallDisplay->textAlign = 18;
-		poolsSmallDisplay->breakRowWidth = 20;
-		poolsSmallDisplay->module = module;
-		addChild(poolsSmallDisplay);
+		poolsSmallDisplayInput = new PoolsSmallDisplayInput(2);
+		poolsSmallDisplayInput->box.size = Vec(14, 20);
+		poolsSmallDisplayInput->box.pos = Vec(-3 , 80);
+		poolsSmallDisplayInput->fontSize = 22;
+		poolsSmallDisplayInput->textAlign = 18;
+		poolsSmallDisplayInput->breakRowWidth = 20;
+		poolsSmallDisplayInput->module = module;
+		addChild(poolsSmallDisplayInput);
 
 
 		addLabeledKnob("Num Output Channels", 10, 156, module, ComputerscareTolyPools::NUM_CHANNELS_KNOB, -14, -24, 0);
@@ -200,6 +226,7 @@ struct ComputerscareTolyPoolsWidget : ModuleWidget {
 		//addChild(outputChannelLabel);
 
 	}
+	PoolsSmallDisplayInput* poolsSmallDisplayInput;
 	PoolsSmallDisplay* poolsSmallDisplay;
 	SmallLetterDisplay* outputChannelLabel;
 };
