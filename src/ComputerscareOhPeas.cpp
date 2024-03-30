@@ -364,7 +364,7 @@ struct ComputerscareOhPeasWidget : ModuleWidget
             y += randAmt * (random::uniform() - .5);
             addInput(createInput<InPort>(mm2px(Vec(xx, y - 0.8)), module, ComputerscareOhPeas::CHANNEL_INPUT + i));
 
-            addParam(createParam<ComputerscareSmallKnob>(mm2px(Vec(xx + 2, y + 34)), module, ComputerscareOhPeas::SCALE_TRIM + i));
+            addParam(createParam<SmallKnob>(mm2px(Vec(xx + 2, y + 34)), module, ComputerscareOhPeas::SCALE_TRIM + i));
 
             addInput(createInput<InPort>(mm2px(Vec(xx, y + 40)),  module, ComputerscareOhPeas::SCALE_CV + i));
 

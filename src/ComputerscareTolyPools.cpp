@@ -126,7 +126,7 @@ struct PoolsSmallDisplay : SmallLetterDisplay
 // yes it is a copy paste of the above structure, and a very janky solution like the rest of the
 // modules where Computerscare.cpp draws its labels but so far I haven't noticed anything that
 // isn't working the way it should...
-struct PoolsSmallDisplayInput : SmallLetterDisplayTEST
+struct PoolsSmallDisplayInput : SmallLetterDisplayThemed
 {
 	ComputerscareTolyPools *module;
 	int ch;
@@ -134,7 +134,7 @@ struct PoolsSmallDisplayInput : SmallLetterDisplayTEST
 	PoolsSmallDisplayInput(int someType)
 	{
 		type = someType;
-		SmallLetterDisplayTEST();
+		SmallLetterDisplayThemed();
 	};
 	void draw(const DrawArgs &args)
 	{
@@ -148,7 +148,7 @@ struct PoolsSmallDisplayInput : SmallLetterDisplayTEST
 		else {
 			value = std::to_string((random::u32() % 16) + 1);
 		}
-		SmallLetterDisplayTEST::draw(args);
+		SmallLetterDisplayThemed::draw(args);
 	}
 };
 

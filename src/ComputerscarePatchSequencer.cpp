@@ -411,7 +411,7 @@ struct NumberDisplayWidget3 : TransparentWidget {
   void draw(const DrawArgs &args) override
   {
     // Background
-    NVGcolor backgroundColor = settings::preferDarkPanels ? nvgRGB(0x24, 0x44, 0x31) : nvgRGB(0x00, 0x00, 0x00);
+    NVGcolor backgroundColor = rack::settings::preferDarkPanels ? nvgRGB(0x1f, 0x1f, 0x26) : nvgRGB(0x00, 0x00, 0x00);
 
     nvgBeginPath(args.vg);
     nvgRoundedRect(args.vg, 0.0, 0.0, box.size.x, box.size.y, 4.0);
@@ -419,13 +419,13 @@ struct NumberDisplayWidget3 : TransparentWidget {
     nvgFill(args.vg);
 
   }
-  void drawLayer(const ComputerscareBGPanel::DrawArgs& args, int layer) override {
+  void drawLayer(const BGPanel::DrawArgs& args, int layer) override {
     if (layer == 1) {
       drawText(args);
     }
     Widget::drawLayer(args, layer);
   }
-  void drawText(const ComputerscareBGPanel::DrawArgs& args) {
+  void drawText(const BGPanel::DrawArgs& args) {
     std::shared_ptr<Font> font = APP->window->loadFont(asset::plugin(pluginInstance, fontPath));
     if (font) {
       // text

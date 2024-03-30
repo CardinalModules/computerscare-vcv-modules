@@ -67,7 +67,7 @@ struct PolyChannelsDisplay : SmallLetterDisplay
 		fontSize = 14;
 		letterSpacing = 1.f;
 		textAlign = 18;
-		textColor = COLOR_COMPUTERSCARE_BLACK;
+		textColor = BLACK;
 		breakRowWidth = 20;
 		SmallLetterDisplay();
 	};

@@ -586,7 +586,7 @@ struct ComputerscareILoveCookiesWidget : ModuleWidget {
 
 
         //label for knob a-z
-        smallLetterDisplay = new SmallLetterDisplayTEST();
+        smallLetterDisplay = new SmallLetterDisplayThemed();
         smallLetterDisplay->box.pos = mm2px(Vec(knobPosX + 6, knobPosY - 2));
         smallLetterDisplay->box.size = Vec(20, 20);
         smallLetterDisplay->value = knoblookup[index];
@@ -614,7 +614,7 @@ struct ComputerscareILoveCookiesWidget : ModuleWidget {
         }
 
         //label for input A-Z
-        smallLetterDisplay = new SmallLetterDisplayTEST();
+        smallLetterDisplay = new SmallLetterDisplayThemed();
         smallLetterDisplay->box.pos = mm2px(Vec(inputPosX + 6, inputPosY - 1));
         smallLetterDisplay->box.size = Vec(20, 20);
         smallLetterDisplay->value = inputlookup[inputindex];
@@ -726,7 +726,7 @@ struct ComputerscareILoveCookiesWidget : ModuleWidget {
   CookiesSmallDisplay* cookiesSmallDisplay;
   CookiesSmallDisplay* cookiesSmallDisplays[numFields];
 
-  SmallLetterDisplayTEST* smallLetterDisplay;
+  SmallLetterDisplayThemed* smallLetterDisplay;
 
   CookiesCurrentStepDisplay* currentWorkingStepDisplay;
   CookiesCurrentStepDisplay* currentWorkingStepDisplays[numFields];

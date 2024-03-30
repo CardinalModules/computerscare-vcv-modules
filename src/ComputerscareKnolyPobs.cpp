@@ -68,9 +68,9 @@ struct ComputerscareKnolyPobs : ComputerscarePolyModule {
 	}
 };
 
-struct NoRandomSmallKnob : ComputerscareSmallKnob {
+struct NoRandomSmallKnob : SmallKnob {
 	NoRandomSmallKnob() {
-		ComputerscareSmallKnob();
+		SmallKnob();
 	};
 };
 struct NoRandomMediumSmallKnob : RoundKnob {
@@ -148,7 +148,7 @@ struct ComputerscareKnolyPobsWidget : ModuleWidget {
 	}
 	void addLabeledKnob(std::string label, int x, int y, ComputerscareKnolyPobs *module, int index, float labelDx, float labelDy) {
 
-		smallLetterDisplay = new SmallLetterDisplayTEST();
+		smallLetterDisplay = new SmallLetterDisplayThemed();
 		smallLetterDisplay->box.size = Vec(5, 10);
 		smallLetterDisplay->fontSize = 18;
 		smallLetterDisplay->value = label;
@@ -173,7 +173,7 @@ struct ComputerscareKnolyPobsWidget : ModuleWidget {
 	PolyOutputChannelsWidget* channelWidget;
 	PolyChannelsDisplay* channelDisplay;
 	DisableableSmoothKnob* fader;
-	SmallLetterDisplayTEST* smallLetterDisplay;
+	SmallLetterDisplayThemed* smallLetterDisplay;
 };
 
 Model *modelComputerscareKnolyPobs = createModel<ComputerscareKnolyPobs, ComputerscareKnolyPobsWidget>("computerscare-knolypobs");

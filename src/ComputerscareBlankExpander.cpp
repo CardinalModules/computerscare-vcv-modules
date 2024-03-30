@@ -155,18 +155,18 @@ struct ComputerscareBlankExpander : Module {
 		scrubbing = scrub;
 	}
 };
-struct FrameScrubKnob : ComputerscareSmallKnob {
+struct FrameScrubKnob : SmallKnob {
 	ComputerscareBlankExpander* module;
 	void onDragStart(const event::DragStart& e) override {
 		module->setScrubbing(true);
-		ComputerscareSmallKnob::onDragStart(e);
+		SmallKnob::onDragStart(e);
 	}
 	void onDragEnd(const event::DragEnd& e) override {
 		module->setScrubbing(false);
-		ComputerscareSmallKnob::onDragEnd(e);
+		SmallKnob::onDragEnd(e);
 	}
 	void onDragMove(const event::DragMove& e) override {
-		ComputerscareSmallKnob::onDragMove(e);
+		SmallKnob::onDragMove(e);
 	};
 };
 struct ClockModeButton : app::SvgSwitch {

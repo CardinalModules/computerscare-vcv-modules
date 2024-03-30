@@ -958,13 +958,13 @@ struct ComputerscareHorseADoodleDooWidget : ModuleWidget {
 			addChild(numStepsKnob);
 			if (knobType == 1) {
 				//trim knob
-				//addParam(createParam<ComputerscareSmallKnob>(Vec(x + 30, y), module, knobIndex + 1));
+				//addParam(createParam<SmallKnob>(Vec(x + 30, y), module, knobIndex + 1));
 				//addInput(createInput<TinyJack>(Vec(x + 40, y), module, inputIndex));
 				//addParam(createParam<ScrambleKnob>(Vec(x+30, y+20), module, scrambleIndex));
 
 			}
 		}
-		addParam(createParam<ComputerscareSmallKnob>(Vec(x + 32, y + 5), module, knobIndex + 1));
+		addParam(createParam<SmallKnob>(Vec(x + 32, y + 5), module, knobIndex + 1));
 		addInput(createInput<TinyJack>(Vec(x + 54, y + 6), module, inputIndex));
 		if (allowScrambleRandom) {
 			addParam(createParam<ScrambleKnob>(Vec(x + 55, y - 15), module, scrambleIndex));

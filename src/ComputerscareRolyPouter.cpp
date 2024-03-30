@@ -250,7 +250,7 @@ struct ComputerscareRolyPouterWidget : ModuleWidget {
 		pouterSmallDisplay->module = module;
 
 		//the text outside the knobs
-		outputChannelLabel = new SmallLetterDisplayTEST();
+		outputChannelLabel = new SmallLetterDisplayThemed();
 		outputChannelLabel->box.size = Vec(5, 5);
 		outputChannelLabel->box.pos = Vec(x + labelDx, y - 12 + labelDy);
 		outputChannelLabel->fontSize = 14;
@@ -339,7 +339,7 @@ struct ComputerscareRolyPouterWidget : ModuleWidget {
 	DisableableSnapKnob* knob;
 	PolyOutputChannelsWidget* channelWidget;
 	PouterSmallDisplay* pouterSmallDisplay;
-	SmallLetterDisplayTEST* outputChannelLabel;
+	SmallLetterDisplayThemed* outputChannelLabel;
 
 	void addMenuItems(ComputerscareRolyPouter *pouter, Menu *menu);
 };
