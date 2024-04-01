@@ -156,7 +156,7 @@ struct PeneratorDisplay : TransparentWidget {
 	PeneratorDisplay() {
 
 	}
-	void drawLayer(const BGPanel::DrawArgs& args, int layer) override {
+	void drawLayer(const ComputerscareBGPanel::DrawArgs& args, int layer) override {
 		if (layer == 1) {
 			float valsToDraw[16] = {1.f};
 			int ch = 16;
@@ -214,8 +214,8 @@ struct ComputerscareGolyPeneratorWidget : ModuleWidget {
 
 		addLabeledKnob<ScrambleSnapKnob>("Algo", 4, 324, module, ComputerscareGolyPenerator::ALGORITHM, 0, 0, true);
 		addLabeledKnob<SmoothKnob>("center", 28, 80, module, ComputerscareGolyPenerator::IN_OFFSET, 0, 0);
-		addLabeledKnob<SmallKnob>("spread", 5, 86, module, ComputerscareGolyPenerator::IN_SCALE, 0, 0);
-		addLabeledKnob<SmallKnob>("scale", 33, 290, module, ComputerscareGolyPenerator::OUT_SCALE, 0, 0);
+		addLabeledKnob<ComputerscareSmallKnob>("spread", 5, 86, module, ComputerscareGolyPenerator::IN_SCALE, 0, 0);
+		addLabeledKnob<ComputerscareSmallKnob>("scale", 33, 290, module, ComputerscareGolyPenerator::OUT_SCALE, 0, 0);
 		addLabeledKnob<SmoothKnob>("offset", 2, 284, module, ComputerscareGolyPenerator::OUT_OFFSET, 0, 0);
 
 		channelWidget = new PolyOutputChannelsWidget(Vec(28, 309), module, ComputerscareGolyPenerator::POLY_CHANNELS);

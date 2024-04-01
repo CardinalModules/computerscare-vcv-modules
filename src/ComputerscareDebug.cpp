@@ -361,7 +361,7 @@ struct StringDisplayWidget3 : Widget {
 		nvgFillColor(ctx.vg, backgroundColor);
 		nvgFill(ctx.vg);
 	}
-	void drawLayer(const BGPanel::DrawArgs& args, int layer) override {
+	void drawLayer(const ComputerscareBGPanel::DrawArgs& args, int layer) override {
 		if (layer == 1) {
 
 			std::shared_ptr<Font> font = APP->window->loadFont(asset::plugin(pluginInstance, fontPath));

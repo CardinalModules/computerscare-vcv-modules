@@ -419,13 +419,13 @@ struct NumberDisplayWidget3 : TransparentWidget {
     nvgFill(args.vg);
 
   }
-  void drawLayer(const BGPanel::DrawArgs& args, int layer) override {
+  void drawLayer(const ComputerscareBGPanel::DrawArgs& args, int layer) override {
     if (layer == 1) {
       drawText(args);
     }
     Widget::drawLayer(args, layer);
   }
-  void drawText(const BGPanel::DrawArgs& args) {
+  void drawText(const ComputerscareBGPanel::DrawArgs& args) {
     std::shared_ptr<Font> font = APP->window->loadFont(asset::plugin(pluginInstance, fontPath));
     if (font) {
       // text

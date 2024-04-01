@@ -903,7 +903,7 @@ struct tPNGDisplay : TBase {
 
 	void setOffsets() {
 	}
-	void drawLayer(const BGPanel::DrawArgs& args, int layer) override {
+	void drawLayer(const ComputerscareBGPanel::DrawArgs& args, int layer) override {
 		if (layer == 1 && lightWidgetMode) {
 			drawImage(args);
 		}
@@ -915,7 +915,7 @@ struct tPNGDisplay : TBase {
 		}
 	}
 
-	void drawImage(const BGPanel::DrawArgs& args) {
+	void drawImage(const ComputerscareBGPanel::DrawArgs& args) {
 		if (blankModule && blankModule->loadedJSON) {
 			std::string modulePath = blankModule->getPath();
 			if (path != modulePath) {
@@ -1098,7 +1098,7 @@ struct ComputerscareBlankWidget : ModuleWidget {
 			box.size = Vec(8 * 15, 380);
 		}
 		{
-			BGPanel *bgPanel = new BGPanel(nvgRGBA(0x00, 0x00, 0x00, 0x00));
+			ComputerscareBGPanel *bgPanel = new ComputerscareBGPanel(nvgRGBA(0x00, 0x00, 0x00, 0x00));
 			bgPanel->box.size = box.size;
 			this->bgPanel = bgPanel;
 			addChild(bgPanel);
@@ -1327,7 +1327,7 @@ struct ComputerscareBlankWidget : ModuleWidget {
 	ComputerscareBlank *blankModule;
 	PNGDisplay *pngDisplay;
 	ComputerscareSVGPanel *panel;
-	BGPanel *bgPanel;
+	ComputerscareBGPanel *bgPanel;
 	TransparentWidget *display;
 	ComputerscareResizeHandle *leftHandle;
 	ComputerscareResizeHandle *rightHandle;

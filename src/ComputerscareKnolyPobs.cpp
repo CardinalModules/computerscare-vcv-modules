@@ -68,9 +68,9 @@ struct ComputerscareKnolyPobs : ComputerscarePolyModule {
 	}
 };
 
-struct NoRandomSmallKnob : SmallKnob {
+struct NoRandomSmallKnob : ComputerscareSmallKnob {
 	NoRandomSmallKnob() {
-		SmallKnob();
+		ComputerscareSmallKnob();
 	};
 };
 struct NoRandomMediumSmallKnob : RoundKnob {
