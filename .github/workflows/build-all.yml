@@ -1,8 +1,8 @@
 name: Build v2
-on: [push, pull_request]
+on: [workflow_dispatch]
 
 env:
-  rack-sdk-version: 2.4.1
+  rack-sdk-version: 2.5.2
 
 defaults:
   run:
@@ -22,7 +22,7 @@ jobs:
           }
         - {
             name: MacOS,
-            os: macos-latest,
+            os: macos-13,
             prepare-os: ""
           }
         - {
@@ -55,14 +55,14 @@ jobs:
         if: runner.os == 'MacOS'
         run: |
           pushd $HOME
-          curl -o Rack-SDK.zip https://vcvrack.com/downloads/Rack-SDK-${{ env.rack-sdk-version }}-mac-x64.zip
+          curl -o Rack-SDK.zip https://vcvrack.com/downloads/Rack-SDK-${{ env.rack-sdk-version }}-mac-x64+arm64.zip
           unzip Rack-SDK.zip
       
       - name: Get Mac arm SDK
         if: runner.os == 'MacOS-arm'
         run: |
           pushd $HOME
-          curl -o Rack-SDK.zip https://vcvrack.com/downloads/Rack-SDK-${{ env.rack-sdk-version }}-mac-arm64.zip
+          curl -o Rack-SDK.zip https://vcvrack.com/downloads/Rack-SDK-${{ env.rack-sdk-version }}-mac-x64+arm64.zip
           unzip Rack-SDK.zip
       
       - name: Get Linux SDK
@@ -131,7 +131,7 @@ jobs:
           pwd
           ls _artifacts
       - name: Upload release assets
-        uses: svenstaro/upload-release-action@v4
+        uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: _artifacts/**/*.vcvplugin
